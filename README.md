@@ -1,14 +1,33 @@
-# Welcome to your CDK TypeScript project
+# CI/CD with CDK 2
 
-This is a blank project for CDK development with TypeScript.
+```bash
+# node ^18
+npm install -g aws-cdk@v2
 
-The `cdk.json` file tells the CDK Toolkit how to execute your app.
+# Only once
+cdk bootstrap
+```
 
-## Useful commands
+```bash
+# Install depenency
+npm ci
 
-* `npm run build`   compile typescript to js
-* `npm run watch`   watch for changes and compile
-* `npm run test`    perform the jest unit tests
-* `cdk deploy`      deploy this stack to your default AWS account/region
-* `cdk diff`        compare deployed stack with current state
-* `cdk synth`       emits the synthesized CloudFormation template
+# Compile
+npm build
+```
+
+```bash
+# Provisioning CI stack
+cdk deploy CIFromRepoToEcrStack
+
+# Then, push 'latest' tagged image to provisioned ECR repository
+
+# Provisioing CD stack
+cdk deploy CDFromEcrToEcsStack
+```
+
+```bash
+# Clean up
+cdk destroy CDFromEcrToEcsStack
+cdk destroy CIFromRepoToEcrStack
+```
